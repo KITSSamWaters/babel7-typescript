@@ -1,12 +1,12 @@
 import {IAction, IConnectedProps} from 'actions/action.interface'
 import {Button} from 'components/Button'
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {connect, Dispatch} from 'react-redux'
 import {IAppState} from 'reducers/index'
 import {ThemeProvider} from 'styled-components'
 import {theme} from 'theme/theme'
 
-interface IAppComponent extends IConnectedProps {
+interface IAppComponent {
 	btnClick: () => void;
 	count: number;
 }
@@ -28,8 +28,8 @@ const AppComponent = connect(
 	(state: IAppState) => ({
 		count: state.count.count,
 	}),
-	(dispatch: (action: IAction) => void) => ({
-		btnClick: () => dispatch({type: 'COUNT'}),
+	(dispatch: Dispatch<IAppState>) => ({
+		btnClick: () => { dispatch({type: 'COUNT', payload: 123123}) },
 	}),
 )(App)
 
